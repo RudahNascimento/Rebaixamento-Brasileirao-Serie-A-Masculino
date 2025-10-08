@@ -75,23 +75,23 @@ Finalmente, ele plota os gráficos de dispersão dos dados em relação às clas
 
 Ele então formata os dados para serem utilizados nos modelos, e roda as 3 funções preditivas, tendo como saída de cada uma o seguinte:
 
-Métricas Médias (Random Forest):\\
-precisao_rebaixado: 0.59\\
-recal_rebaixado: 0.79\\
-f1_rebaixado: 0.67\\
-acuracia: 0.85\\
+Métricas Médias (Random Forest):
+precisao_rebaixado: 0.59
+recal_rebaixado: 0.79
+f1_rebaixado: 0.67
+acuracia: 0.85
 
-Métricas Médias (Gradient Boosting):\\
-precisao_rebaixado: 0.59\\
-recal_rebaixado: 0.69\\
-f1_rebaixado: 0.63\\
-acuracia: 0.85\\
+Métricas Médias (Gradient Boosting):
+precisao_rebaixado: 0.59
+recal_rebaixado: 0.69
+f1_rebaixado: 0.63
+acuracia: 0.85
 
-Métricas Médias (Regressão Logística):\\
-precisao_rebaixado: 0.50\\
-recal_rebaixado: 0.79\\
-f1_rebaixado: 0.61\\
-acuracia: 0.81\\
+Métricas Médias (Regressão Logística):
+precisao_rebaixado: 0.50
+recal_rebaixado: 0.79
+f1_rebaixado: 0.61
+acuracia: 0.81
 
 O suposto torcedor sabe da natureza aleatória do campeonato brasileiro, onde times podem fazer campanhas de rebaixado mas que os colocariam na parte superior da tabela em outros anos. O modelo utilizado como base do projeto foi aplicado no Campeonato Holandês de Futebol Masculino, notoriamente menos aleatório que o Campeonato Brasileiro, e mesmo assim a maior acurácia atingida foi de 0.54 (importante citar que o paper procurava prever resultado de jogos, uma finalidade muito mais complexa de se atingir, mas a natureza aleatória compartilhada entre os sistemas analisados continua evidenciada). Mesmo a modelagem se utilizando de várias tecnologías e algoritmos que equilibram mais os dados, o máximo de acurácia que é conseguida é de 0.85, tendo as melhores métricas sobre a identificação da classe "Rebaixados" no modelo de Random Forest, ainda sendo bastante aquém de um modelo ótimo (com acurácia de 0.97 ou superior). 
 
