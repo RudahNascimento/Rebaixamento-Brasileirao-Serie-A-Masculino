@@ -95,7 +95,7 @@ acuracia: 0.81
 
 O suposto torcedor sabe da natureza aleatória do campeonato brasileiro, onde times podem fazer campanhas de rebaixado mas que os colocariam na parte superior da tabela em outros anos. O modelo utilizado como base do projeto foi aplicado no Campeonato Holandês de Futebol Masculino, notoriamente menos aleatório que o Campeonato Brasileiro, e mesmo assim a maior acurácia atingida foi de 0.54 (importante citar que o paper procurava prever resultado de jogos, uma finalidade muito mais complexa de se atingir, mas a natureza aleatória compartilhada entre os sistemas analisados continua evidenciada). Mesmo a modelagem se utilizando de várias tecnologías e algoritmos que equilibram mais os dados, o máximo de acurácia que é conseguida é de 0.85, tendo as melhores métricas sobre a identificação da classe "Rebaixados" no modelo de Random Forest, ainda sendo bastante aquém de um modelo ótimo (com acurácia de 0.97 ou superior). 
 
-Mas o suposto desesperado torcedor, se apegando no mínimo de certeza dentro do caos, utiliza então o modelo com as melhores métricas, o de Random Forest, e obtém o resultado de que seu suposto time Santos, pelo menos dessa vez, na 19º, no ano de 2025, na Série A do Campeonato Brasileiro de Futebol Masculino, com 59% de chance, não será rebaixado!
+Mas o suposto desesperado torcedor, se apegando no mínimo de certeza dentro do caos, utiliza então o modelo com as melhores métricas, o de Random Forest, e obtém o resultado de que seu suposto time Santos, pelo menos dessa vez, na 19º rodada, no ano de 2025, na Série A do Campeonato Brasileiro de Futebol Masculino, com 59% de chance, não será rebaixado!
 
 ---
 
