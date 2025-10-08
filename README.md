@@ -64,13 +64,13 @@ Vamos supor que o usuário seja torcedor de um time recém promovido da Série B
 
 Ele então roda a função **criar_tabela_historica**, determinando a rodada como 19. Após isso, ele roda a função **identifica_outliers**, e identifica que existem alguns outliers extremamente raros na sua sua análise, partindo então para uma análise exploratória dos dados dentro do Notebook do arquivo **analise_exploratória_rebaixamento.ipynb**. Nele, o suposto torcedor do Santos verifica que realmente 75.31% dos times que sobem da segunda divisão, são rebaixados em até 5 anos, justificando a feature de "Permanecimento". Após isso, produz os gráficos BoxPlot, identificando agora visualmente que alguns outliers dos dados distoam de forma extremamente drástica do dataset em geral, escolhendo então eliminá-los da análise:
 <p align="center">
-  <img src="assets/boxplot_exemplo.png" width="550" alt="Boxplot mostrando a distribuição das features entre times rebaixados e não rebaixados.">
+  <img src="assets/boxplot_exemplo.png" width="800" alt="Boxplot mostrando a distribuição das features entre times rebaixados e não rebaixados.">
 </p>
 
 Finalmente, ele plota os gráficos de dispersão dos dados em relação às classes e verifica que o comportamento das Features de Vitórias, Derrotas, Gols Feitos e Gols Sofridos visualmente se encaixam no modelo de curva sinuosa, justificando a utilização por exemplo do modelo de regressão logística:
 
 <p align="center">
-  <img src="assets/scatter_rebaixamento.png" width="550" alt="Gráfico de dispersão mostrando a relação entre saldo de gols e pontos.">
+  <img src="assets/scatter_rebaixamento.png" width="800" alt="Gráfico de dispersão mostrando a relação entre saldo de gols e pontos.">
 </p>
 
 Ele então formata os dados para serem utilizados nos modelos, e roda as 3 funções preditivas, tendo como saída de cada uma o seguinte:
