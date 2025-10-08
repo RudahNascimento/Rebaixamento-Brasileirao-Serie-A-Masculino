@@ -1,3 +1,4 @@
+import pandas as pd
 from src import data_processing
 from src import eda
 from src import modelos
@@ -24,13 +25,26 @@ def main():
     y = dados_modelo['Situação']
 
     # 6) Roda o modelo de Random Forest
-    modelos.random_forest(X,y)
+    metricas_rf, parametros_rf, modelo_rf = modelos.random_forest(X,y)
 
     # 7) Roda o modelo de Gradient Boost
-    modelos.gradient_boosting(X,y)
+    metricas_gb, parametros_gb, modelo_gb = modelos.gradient_boosting(X,y)
 
     # 8) Roda o modelo de Regressão Logística
-    modelos.logistic_regression(X,y)
+    metricas_rl, parametros_rl, modelo_rl = modelos.logistic_regression(X,y)
+
+    # 9) Faz a previsão de rebaixamento ou não do time escolhido
+
+    novo_time = pd.DataFrame({
+        'V': [7],
+        'D': [9],
+        'E': [3],
+        'GF': [22],
+        'GT': [24],
+        'Permanecimento': [0]
+    })
+
+    modelos.previsao(modelo_rf, novo_time)
 
 if __name__ == "__main__":
     main()

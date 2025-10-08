@@ -10,7 +10,7 @@ def carregar_dados(jogos_csv:str)->pd.DataFrame:
     df = pd.read_csv(jogos_csv)
 
 
-    # Ajuste de datas
+    # Transformação da coluna datas para datetime
     df['data'] = pd.to_datetime(df['data'], format="%d/%m/%Y")
 
     # Corrigir jogos de 2020 que aconteceram em 2021 (pandemia)
@@ -225,8 +225,8 @@ def criar_tabela_historica(rodada: int) -> pd.DataFrame:
             dados_gerais.loc[index, 'Permanecimento'] = 5
 
     # Salva o arquivo final
-    dados_gerais.to_csv("data/dados_gerais.csv", index=False)
-    print("✅ Dados finais salvos em data/dados_gerais.csv")
+    dados_gerais.to_csv(f"data/dados_gerais_temporada{rodada}.csv", index=False)
+    print(f"✅ Dados finais salvos em data/dados_gerais_temporada{rodada}.csv")
 
     return dados_gerais
 

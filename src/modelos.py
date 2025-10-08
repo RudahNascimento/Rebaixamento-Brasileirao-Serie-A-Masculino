@@ -8,7 +8,7 @@ from imblearn.over_sampling import SMOTE
 from imblearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
 
-def random_forest(X: pd.DataFrame, y: pd.Series) -> Tuple[Dict[str, float], Dict[str, Any]]:
+def random_forest(X: pd.DataFrame, y: pd.Series) -> Tuple[Dict[str, float], Dict[str, Any], Pipeline]:
     """
 
     Aplica o SMOTE para equilibrar a distribuição da classe minoritária, os rebaixados, dentro de uma pipeline
@@ -56,9 +56,9 @@ def random_forest(X: pd.DataFrame, y: pd.Series) -> Tuple[Dict[str, float], Dict
     for nome, valor in melhores_parametros.items():
         print(f"{nome}: {valor}")
 
-    return metricas, melhores_parametros
+    return metricas, melhores_parametros, melhor_modelo
 
-def gradient_boosting(X: pd.DataFrame, y: pd.Series) -> Tuple[Dict[str, float], Dict[str, Any]]:
+def gradient_boosting(X: pd.DataFrame, y: pd.Series) -> Tuple[Dict[str, float], Dict[str, Any], Pipeline]:
     """
 
     Aplica o SMOTE para equilibrar a distribuição da classe minoritária, os rebaixados, dentro de uma pipeline
@@ -114,9 +114,9 @@ def gradient_boosting(X: pd.DataFrame, y: pd.Series) -> Tuple[Dict[str, float], 
     for nome, valor in melhores_parametros.items():
         print(f"{nome}: {valor}")
 
-    return metricas, melhores_parametros
+    return metricas, melhores_parametros, melhor_modelo
 
-def logistic_regression(X: pd.DataFrame, y: pd.Series) -> Tuple[Dict[str, float], Dict[str, Any]]:
+def logistic_regression(X: pd.DataFrame, y: pd.Series) -> Tuple[Dict[str, float], Dict[str, Any], Pipeline]:
     """
 
     Faz um escalonamento dos dados, aplica o SMOTE para equilibrar a distribuição da classe minoritária,
@@ -178,6 +178,21 @@ def logistic_regression(X: pd.DataFrame, y: pd.Series) -> Tuple[Dict[str, float]
     for nome, valor in melhores_parametros.items():
         print(f"{nome}: {valor}")
 
-    return metricas, melhores_parametros
+    return metricas, melhores_parametros, melhor_modelo
+
+def previsao(modelo_treinado: Pipeline, novo_time: pd.DataFrame) -> None:
+    """
+
+    Recebe um modelo treinado e um DataFrame com as variáveis do time e imprime a previsão.
+    """
+
+    # Faz a previsão
+    previsao = modelo_treinado.predict(novo_time)[0]
+
+    # Printando o resultado
+    if previsao == 0:
+        print("Previsão: Time Rebaixado")
+    else:
+        print("Previsão: Time Não Rebaixado")
 
 
