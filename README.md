@@ -32,7 +32,9 @@ Este projeto realiza uma análise histórica do Campeonato Brasileiro de Futebol
 As primeiras funções utilizadas estão concentradas no arquivo **data_processing.py**, explicitando suas funcionalidades de forma sequencial:  
 
 **1 -** Os dados com todas as partidas concatenadas são lidos e ajustados pela função **carregar_dados**.  
+
 **2 -** A função **criar_tabela_temporada** recebe os dados ajustados e cria a tabela específica da temporada até a rodada que quer ser feita a previsão.  
+
 **3 -** A função **criar_tabela_historica** concatena as tabelas geradas pela função anterior e cria e preenche a coluna "Permanecimento".   referente à quantidade de anos de estadia do time na Série A. Ela então salva os dados de temporadas específicas como "tabela_TEMPORADA_rodadaRODADA.csv" e os dados concatenados como "data/dados_gerais_temporadaRODADA.csv", todos na pasta data.  
 
 Após isso, no arquivo **eda.py**, temos: 
@@ -45,8 +47,10 @@ Voltando para o arquivo **data_processing.py**, temos:
 
 Finalmente, no arquivo **modelos.py**:  
 
-**6 -** A função *random_forest* faz o hyperparameter tuning, equilibra a distribuição da classe minoritária "rebaixados" utilizando o SMOTE, tudo dentro de uma pipeline para evitar data leak, e constrói o modelo de Random Forest, retornando os parâmetros do hyperparameter tuning e as métricas de precisão, recall e F1, referentes à classe "rebaixados", e acurácia geral do modelo.  
+**6 -** A função **random_forest** faz o hyperparameter tuning, equilibra a distribuição da classe minoritária "rebaixados" utilizando o SMOTE, tudo dentro de uma pipeline para evitar data leak, e constrói o modelo de Random Forest, retornando os parâmetros do hyperparameter tuning e as métricas de precisão, recall e F1, referentes à classe "rebaixados", e acurácia geral do modelo. 
+
 **7 -** A função **gradient_boosting** faz o mesmo para o modelo de Gradient Boosting.  
+
 **8 -** A função **logistic_regression** faz o mesmo para o modelo de Regressão Logística.  
 
 Obs: No passo 3, é citado que a função **criar_tabela_historica** cria e preenche uma coluna "Permanecimento" referente à quantidade de anos de estadia do time na Série A. Isso foi um feature adicionado no modelo a partir da análise presente no arquivo **analise_exploratória_rebaixamento.ipynb**, da pasta notebook, onde foi identificado que 75.31% dos times que sobem para a Série A, caem em até 5 temporadas. O time ao ser promovido possui o valor de 0 na feature na sua primeira temporada na primeira divisão, sendo incrementado o valor em 1 à cada temporada que o time não cai, chegando ao valor máximo de 5.
