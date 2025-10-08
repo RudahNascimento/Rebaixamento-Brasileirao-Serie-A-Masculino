@@ -3,12 +3,12 @@ Este projeto realiza uma análise histórica do Campeonato Brasileiro de Futebol
 
 ---
 
-# Fontes
+## Fontes
 - A parte de modelagem foi baseada no paper "Predicting The Dutch Football Competition Using Public Data: A Machine Learning Approach", de Niek Tax e Yme Joustra.
 - Foi utilizado o arquivo "campeonato-brasileiro-full.csv", presente no repositório https://github.com/raulrosapacheco/BrasileiraoAnalise.git, que concatena todos os jogos que ocorreram no campeonato brasileiro de futebol masculino nas temporadas de 2003 até 2024.
 
 ---
-# Tecnologias Utilizadas
+## Tecnologias Utilizadas
 - Python
 - Pandas
 - Scikit-learn
@@ -18,14 +18,14 @@ Este projeto realiza uma análise histórica do Campeonato Brasileiro de Futebol
 - SMOTE
 
 ---
-# Modelos Utilizados
+## Modelos Utilizados
 - Random Forest
 - Gradient Boosting
 - Regressão Logística
 
 ---
 
-# Fluxo do Projeto
+## Fluxo do Projeto
 
 **0 -** Todas as bibliotecas utilizadas no projeto estão listadas no arquivo **requirements.txt**.
 
@@ -57,32 +57,41 @@ Obs: No passo 3, é citado que a função **criar_tabela_historica** cria e pree
 
 ---
 
-# Exemplo Aplicado
+## Exemplo Aplicado
 Dentro do arquivo **main.py** , foi estruturado um exemplo de utilização do projeto:
 
 Vamos supor que o usuário seja torcedor de um time recém promovido da Série B do campeonato brasileiro de futebol masculino chamado Santos, e que ele supostamente possua um temor intenso de que seu time caia novamente. Estando o campeonato na **19º rodada**, a tabela do seu suposto time é de **7 Vitórias**, **3 Empates**, **9 Derrotas**, **22 Gols Feitos** e **24 Gols Tomados**. 
 
-Ele então roda a função **criar_tabela_historica**, determinando a rodada como 19. Após isso, ele roda a função **identifica_outliers**, e identifica que existem alguns outliers extremamente raros na sua sua análise, partindo então para uma análise exploratória dos dados dentro do Notebook do arquivo **analise_exploratória_rebaixamento.ipynb**. Nele, o suposto torcedor do Santos verifica que realmente 75.31% dos times que sobem da segunda divisão, são rebaixados em até 5 anos, justificando a feature de "Permanecimento". Após isso, produz os gráficos BoxPlot, identificando agora visualmente que alguns outliers dos dados distoam de forma extremamente drástica do dataset em geral, escolhendo então eliminá-los da análise. Finalmente, ele plota os gráficos de dispersão dos dados em relação às classes e verifica que o comportamento das Features de Vitórias, Derrotas, Gols Feitos e Gols Sofridos visualmente se encaixam no modelo de curva sinuosa, justificando a utilização por exemplo do modelo de regressão logística.
+Ele então roda a função **criar_tabela_historica**, determinando a rodada como 19. Após isso, ele roda a função **identifica_outliers**, e identifica que existem alguns outliers extremamente raros na sua sua análise, partindo então para uma análise exploratória dos dados dentro do Notebook do arquivo **analise_exploratória_rebaixamento.ipynb**. Nele, o suposto torcedor do Santos verifica que realmente 75.31% dos times que sobem da segunda divisão, são rebaixados em até 5 anos, justificando a feature de "Permanecimento". Após isso, produz os gráficos BoxPlot, identificando agora visualmente que alguns outliers dos dados distoam de forma extremamente drástica do dataset em geral, escolhendo então eliminá-los da análise:
+<p align="center">
+  <img src="assets/boxplot_situacao.png" width="550" alt="Boxplot mostrando a distribuição das features entre times rebaixados e não rebaixados.">
+</p>
+
+Finalmente, ele plota os gráficos de dispersão dos dados em relação às classes e verifica que o comportamento das Features de Vitórias, Derrotas, Gols Feitos e Gols Sofridos visualmente se encaixam no modelo de curva sinuosa, justificando a utilização por exemplo do modelo de regressão logística:
+
+<p align="center">
+  <img src="assets/dispersao_rebaixamento.png" width="550" alt="Gráfico de dispersão mostrando a relação entre saldo de gols e pontos.">
+</p>
 
 Ele então formata os dados para serem utilizados nos modelos, e roda as 3 funções preditivas, tendo como saída de cada uma o seguinte:
 
-Métricas Médias (Random Forest):
-precisao_rebaixado: 0.59
-recal_rebaixado: 0.79
-f1_rebaixado: 0.67
-acuracia: 0.85
+Métricas Médias (Random Forest):\\
+precisao_rebaixado: 0.59\\
+recal_rebaixado: 0.79\\
+f1_rebaixado: 0.67\\
+acuracia: 0.85\\
 
-Métricas Médias (Gradient Boosting):
-precisao_rebaixado: 0.59
-recal_rebaixado: 0.69
-f1_rebaixado: 0.63
-acuracia: 0.85
+Métricas Médias (Gradient Boosting):\\
+precisao_rebaixado: 0.59\\
+recal_rebaixado: 0.69\\
+f1_rebaixado: 0.63\\
+acuracia: 0.85\\
 
-Métricas Médias (Regressão Logística):
-precisao_rebaixado: 0.50
-recal_rebaixado: 0.79
-f1_rebaixado: 0.61
-acuracia: 0.81
+Métricas Médias (Regressão Logística):\\
+precisao_rebaixado: 0.50\\
+recal_rebaixado: 0.79\\
+f1_rebaixado: 0.61\\
+acuracia: 0.81\\
 
 O suposto torcedor sabe da natureza aleatória do campeonato brasileiro, onde times podem fazer campanhas de rebaixado mas que os colocariam na parte superior da tabela em outros anos. O modelo utilizado como base do projeto foi aplicado no Campeonato Holandês de Futebol Masculino, notoriamente menos aleatório que o Campeonato Brasileiro, e mesmo assim a maior acurácia atingida foi de 0.54 (importante citar que o paper procurava prever resultado de jogos, uma finalidade muito mais complexa de se atingir, mas a natureza aleatória compartilhada entre os sistemas analisados continua evidenciada). Mesmo a modelagem se utilizando de várias tecnologías e algoritmos que equilibram mais os dados, o máximo de acurácia que é conseguida é de 0.85, tendo as melhores métricas sobre a identificação da classe "Rebaixados" no modelo de Random Forest, ainda sendo bastante aquém de um modelo ótimo (com acurácia de 0.97 ou superior). 
 
@@ -90,7 +99,7 @@ Mas o suposto desesperado torcedor, se apegando no mínimo de certeza dentro do 
 
 ---
 
-# Sugestão Para Projetos Futuros
+## Sugestão Para Projetos Futuros
 O projeto possui os dados entre os anos de 2003, onde foi iniciado o modelo de pontos corridos do campeonato, até 2024, último campeonato finalizado até a data. Para ser realizado uma previsão em anos seguintes, o arquivo **campeonato-brasileiro-full**, dentro da pasta data, deve ser atualizado com os jogos dos subsequentes campeonatos, dentro da função **criar_tabela_historica**, devem ser adicionados manualmente na lista **rebaixados_por_ano** os seus times que foram rebaixados e no loop **"for ano in range(2003, 2025):"**, deve ser trocado o segundo termo para o ano adequado.
 
 Existem diversos algorítmos diferentes de machine learning que possivelmente gerariam resultados diferentes que os obtidos nesse projeto, encorajo a serem testados.
@@ -99,7 +108,7 @@ Dentro da função **criar_tabela_temporada**, ao ser retirado o termo **"['roda
 
 ---
 
-# Contatos do Autor
+## Contatos do Autor
 Para possíveis dúvidas, críticas ou sugestões sobre o presente projeto.
 
 E-mail: rud.ah765@gmail.com
