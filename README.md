@@ -27,7 +27,7 @@ Este projeto realiza uma análise histórica do Campeonato Brasileiro de Futebol
 
 # Fluxo do Projeto
 
-0 - Todas as bibliotecas utilizadas no projeto estão listadas no arquivo **requirements.txt**.
+**0 -** Todas as bibliotecas utilizadas no projeto estão listadas no arquivo **requirements.txt**.
 
 As primeiras funções utilizadas estão concentradas no arquivo **data_processing.py**, explicitando suas funcionalidades de forma sequencial:  
 
