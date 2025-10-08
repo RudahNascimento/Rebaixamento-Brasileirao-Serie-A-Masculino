@@ -27,38 +27,38 @@ Este projeto realiza uma análise histórica do Campeonato Brasileiro de Futebol
 
 # Fluxo do Projeto
 
-0 - Todas as bibliotecas utilizadas no projeto estão listadas no arquivo *requirements.txt*.
+0 - Todas as bibliotecas utilizadas no projeto estão listadas no arquivo **requirements.txt**.
 
-As primeiras funções utilizadas estão concentradas no arquivo *data_processing.py*, explicitando suas funcionalidades de forma sequencial:  
+As primeiras funções utilizadas estão concentradas no arquivo **data_processing.py**, explicitando suas funcionalidades de forma sequencial:  
 
-*1 -* Os dados com todas as partidas concatenadas são lidos e ajustados pela função *carregar_dados*.  
-*2 -* A função *criar_tabela_temporada* recebe os dados ajustados e cria a tabela específica da temporada até a rodada que quer ser feita a previsão.  
-*3 -* A função *criar_tabela_historica* concatena as tabelas geradas pela função anterior e cria e preenche a coluna "Permanecimento".   referente à quantidade de anos de estadia do time na Série A. Ela então salva os dados de temporadas específicas como "tabela_TEMPORADA_rodadaRODADA.csv" e os dados concatenados como "data/dados_gerais_temporadaRODADA.csv", todos na pasta data.  
+**1 -** Os dados com todas as partidas concatenadas são lidos e ajustados pela função **carregar_dados**.  
+**2 -** A função **criar_tabela_temporada** recebe os dados ajustados e cria a tabela específica da temporada até a rodada que quer ser feita a previsão.  
+**3 -** A função **criar_tabela_historica** concatena as tabelas geradas pela função anterior e cria e preenche a coluna "Permanecimento".   referente à quantidade de anos de estadia do time na Série A. Ela então salva os dados de temporadas específicas como "tabela_TEMPORADA_rodadaRODADA.csv" e os dados concatenados como "data/dados_gerais_temporadaRODADA.csv", todos na pasta data.  
 
-Após isso, no arquivo *eda.py*, temos: 
+Após isso, no arquivo **eda.py**, temos: 
 
-*4 -* A função *identifica_outliers* analisa os dados concatenados e devolve os outliers, tomando como base o padrão de Tukey.  
+**4 -** A função **identifica_outliers** analisa os dados concatenados e devolve os outliers, tomando como base o padrão de Tukey.  
 
-Voltando para o arquivo *data_processing.py*, temos:  
+Voltando para o arquivo **data_processing.py**, temos:  
 
-*5 -* A função *tabela_modelo_format* formata os dados para serem utilizados nos modelos preditivos.  
+**5 -** A função **tabela_modelo_format** formata os dados para serem utilizados nos modelos preditivos.  
 
-Finalmente, no arquivo *modelos.py*:  
+Finalmente, no arquivo **modelos.py**:  
 
-*6 -* A função *random_forest* faz o hyperparameter tuning, equilibra a distribuição da classe minoritária "rebaixados" utilizando o SMOTE, tudo dentro de uma pipeline para evitar data leak, e constrói o modelo de Random Forest, retornando os parâmetros do hyperparameter tuning e as métricas de precisão, recall e F1, referentes à classe "rebaixados", e acurácia geral do modelo.  
-*7 -* A função *gradient_boosting* faz o mesmo para o modelo de Gradient Boosting.  
-*8 -* A função *logistic_regression* faz o mesmo para o modelo de Regressão Logística.  
+**6 -** A função *random_forest* faz o hyperparameter tuning, equilibra a distribuição da classe minoritária "rebaixados" utilizando o SMOTE, tudo dentro de uma pipeline para evitar data leak, e constrói o modelo de Random Forest, retornando os parâmetros do hyperparameter tuning e as métricas de precisão, recall e F1, referentes à classe "rebaixados", e acurácia geral do modelo.  
+**7 -** A função **gradient_boosting** faz o mesmo para o modelo de Gradient Boosting.  
+**8 -** A função **logistic_regression** faz o mesmo para o modelo de Regressão Logística.  
 
-Obs: No passo 3, é citado que a função *criar_tabela_historica* cria e preenche uma coluna "Permanecimento" referente à quantidade de anos de estadia do time na Série A. Isso foi um feature adicionado no modelo a partir da análise presente no arquivo *analise_exploratória_rebaixamento.ipynb*, da pasta notebook, onde foi identificado que 75.31% dos times que sobem para a Série A, caem em até 5 temporadas. O time ao ser promovido possui o valor de 0 na feature na sua primeira temporada na primeira divisão, sendo incrementado o valor em 1 à cada temporada que o time não cai, chegando ao valor máximo de 5.
+Obs: No passo 3, é citado que a função **criar_tabela_historica** cria e preenche uma coluna "Permanecimento" referente à quantidade de anos de estadia do time na Série A. Isso foi um feature adicionado no modelo a partir da análise presente no arquivo **analise_exploratória_rebaixamento.ipynb**, da pasta notebook, onde foi identificado que 75.31% dos times que sobem para a Série A, caem em até 5 temporadas. O time ao ser promovido possui o valor de 0 na feature na sua primeira temporada na primeira divisão, sendo incrementado o valor em 1 à cada temporada que o time não cai, chegando ao valor máximo de 5.
 
 ---
 
 # Exemplo Aplicado
-Dentro do arquivo *main.py* , foi estruturado um exemplo de utilização do projeto:
+Dentro do arquivo **main.py** , foi estruturado um exemplo de utilização do projeto:
 
-Vamos supor que o usuário seja torcedor de um time recém promovido da Série B do campeonato brasileiro de futebol masculino chamado Santos, e que ele supostamente possua um temor intenso de que seu time caia novamente. Estando o campeonato na 19º rodada, a tabela do seu suposto time é de *7 Vitórias*, *3 Empates*, *9 Derrotas*, *22 Gols Feitos* e *24 Gols Tomados*. 
+Vamos supor que o usuário seja torcedor de um time recém promovido da Série B do campeonato brasileiro de futebol masculino chamado Santos, e que ele supostamente possua um temor intenso de que seu time caia novamente. Estando o campeonato na **19º rodada**, a tabela do seu suposto time é de **7 Vitórias**, **3 Empates**, **9 Derrotas**, **22 Gols Feitos** e **24 Gols Tomados**. 
 
-Ele então roda a função *criar_tabela_historica*, determinando a rodada como 19. Após isso, ele roda a função *identifica_outliers*, e identifica que existem alguns outliers extremamente raros na sua sua análise, partindo então para uma análise exploratória dos dados dentro do Notebook do arquivo *analise_exploratória_rebaixamento.ipynb*. Nele, o suposto torcedor do Santos verifica que realmente 75.31% dos times que sobem da segunda divisão, são rebaixados em até 5 anos, justificando a feature de "Permanecimento". Após isso, produz os gráficos BoxPlot, identificando agora visualmente que alguns outliers dos dados distoam de forma extremamente drástica do dataset em geral, escolhendo então eliminá-los da análise. Finalmente, ele plota os gráficos de dispersão dos dados em relação às classes e verifica que o comportamento das Features de Vitórias, Derrotas, Gols Feitos e Gols Sofridos visualmente se encaixam no modelo de curva sinuosa, justificando a utilização por exemplo do modelo de regressão logística.
+Ele então roda a função **criar_tabela_historica**, determinando a rodada como 19. Após isso, ele roda a função **identifica_outliers**, e identifica que existem alguns outliers extremamente raros na sua sua análise, partindo então para uma análise exploratória dos dados dentro do Notebook do arquivo **analise_exploratória_rebaixamento.ipynb**. Nele, o suposto torcedor do Santos verifica que realmente 75.31% dos times que sobem da segunda divisão, são rebaixados em até 5 anos, justificando a feature de "Permanecimento". Após isso, produz os gráficos BoxPlot, identificando agora visualmente que alguns outliers dos dados distoam de forma extremamente drástica do dataset em geral, escolhendo então eliminá-los da análise. Finalmente, ele plota os gráficos de dispersão dos dados em relação às classes e verifica que o comportamento das Features de Vitórias, Derrotas, Gols Feitos e Gols Sofridos visualmente se encaixam no modelo de curva sinuosa, justificando a utilização por exemplo do modelo de regressão logística.
 
 Ele então formata os dados para serem utilizados nos modelos, e roda as 3 funções preditivas, tendo como saída de cada uma o seguinte:
 
@@ -87,11 +87,11 @@ Mas o suposto desesperado torcedor, se apegando no mínimo de certeza dentro do 
 ---
 
 # Sugestão Para Projetos Futuros
-O projeto possui os dados entre os anos de 2003, onde foi iniciado o modelo de pontos corridos do campeonato, até 2024, último campeonato finalizado até a data. Para ser realizado uma previsão em anos seguintes, o arquivo *campeonato-brasileiro-full*, dentro da pasta data, deve ser atualizado com os jogos dos subsequentes campeonatos, dentro da função *criar_tabela_historica*, devem ser adicionados manualmente na lista *rebaixados_por_ano* os seus times que foram rebaixados e no loop *"for ano in range(2003, 2025):"*, deve ser trocado o segundo termo para o ano adequado.
+O projeto possui os dados entre os anos de 2003, onde foi iniciado o modelo de pontos corridos do campeonato, até 2024, último campeonato finalizado até a data. Para ser realizado uma previsão em anos seguintes, o arquivo **campeonato-brasileiro-full**, dentro da pasta data, deve ser atualizado com os jogos dos subsequentes campeonatos, dentro da função **criar_tabela_historica**, devem ser adicionados manualmente na lista **rebaixados_por_ano** os seus times que foram rebaixados e no loop **"for ano in range(2003, 2025):"**, deve ser trocado o segundo termo para o ano adequado.
 
 Existem diversos algorítmos diferentes de machine learning que possivelmente gerariam resultados diferentes que os obtidos nesse projeto, encorajo a serem testados.
 
-Dentro da função *criar_tabela_temporada*, ao ser retirado o termo *"['rodada'] <= rodada]"* no loop *"for _, jogo in dados_ano[dados_ano['rodada'] <= rodada].iterrows():"*, são geradas as tabelas de todos os campeonatos finalizados, sendo possível então realizar uma análise exploratória da história da Série A do Campeonato Masculino de Futebol como um todo, encorajo a ser realizado.
+Dentro da função **criar_tabela_temporada**, ao ser retirado o termo **"['rodada'] <= rodada]"** no loop **"for _, jogo in dados_ano[dados_ano['rodada'] <= rodada].iterrows():"**, são geradas as tabelas de todos os campeonatos finalizados, sendo possível então realizar uma análise exploratória da história da Série A do Campeonato Masculino de Futebol como um todo, encorajo a ser realizado.
 
 ---
 
